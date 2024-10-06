@@ -1,0 +1,27 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - "**"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install latest Git
+        run: |
+          sudo add-apt-repository ppa:git-core/ppa -y
+          sudo apt-get update
+          sudo apt-get install git -y
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 18
+          cache: 'pnpm'
+      - uses: actions/setup-node@v4
+      - run: git config --global core.longpaths true
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
+      - run: pnpm run build
