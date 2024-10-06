@@ -1,0 +1,151 @@
+services:
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: ./apps/auth/Dockerfile
+      target: builder
+    command: pnpm run start:dev auth
+    #command: sh -c "npx prisma migrate deploy --schema=./prisma/schema.prisma && pnpm run start:dev users-management"  
+    develop:
+      watch:
+        - action: sync
+          path: ./apps/auth
+          target: /usr/src/app/apps/auth
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
+    ports:
+      - '4001:4001'
+    env_file:
+      - ./apps/auth/.env
+    depends_on:
+      - mongodb
+    #   - dev-db
+    #   - nats
+    networks:
+      - backend_nest
+ 
+  # billing-service:
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/billing/Dockerfile
+  #     target: builder
+  #   command: pnpm run start:dev billing
+  #   #command: sh -c "npx prisma migrate deploy --schema=./prisma/schema.prisma && pnpm run start:dev users-management"  
+  #   develop:
+  #     watch:
+  #       - action: sync
+  #         path: ./apps/billing
+  #         target: /usr/src/app/apps/billing
+  #         ignore:
+  #           - node_modules/
+  #       - action: rebuild
+  #         path: package.json
+  #   env_file:
+  #     - ./apps/billing/.env
+  #   depends_on:
+  #     - mongodb
+  #   #   - dev-db
+  #   #   - nats
+  #   networks:
+  #     - backend_nest
+
+  # notifications-service:
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/notifications/Dockerfile
+  #     target: builder
+  #   command: pnpm run start:dev notifications
+  #   #command: sh -c "npx prisma migrate deploy --schema=./prisma/schema.prisma && pnpm run start:dev users-management"  
+  #   develop:
+  #     watch:
+  #       - action: sync
+  #         path: ./apps/notifications
+  #         target: /usr/src/app/apps/notifications
+  #         ignore:
+  #           - node_modules/
+  #       - action: rebuild
+  #         path: package.json
+  #   env_file:
+  #     - ./apps/notifications/.env
+  #   depends_on:
+  #     - mongodb
+  #   #   - dev-db
+  #   #   - nats
+  #   networks:
+  #     - backend_nest
+
+
+  # user-management-service:
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/users-management/Dockerfile
+  #     target: builder
+  #   command: pnpm run start:dev users-management
+  #   #command: sh -c "npx prisma migrate deploy --schema=./prisma/schema.prisma && pnpm run start:dev users-management"  
+  #   develop:
+  #     watch:
+  #       - action: sync
+  #         path: ./apps/users-management
+  #         target: /usr/src/app/apps/users-management
+  #         ignore:
+  #           - node_modules/
+  #       - action: rebuild
+  #         path: package.json
+  #   ports:
+  #     - '4003:4003'
+  #   env_file:
+  #     - ./apps/users-management/.env
+  #   depends_on:
+  #     - mongodb
+  #   #   - dev-db
+  #   #   - nats
+  #   networks:
+  #     - backend_nest
+
+
+  # nats:
+  #   image: nats:latest
+  #   ports:
+  #     - '4222:4222'
+  #   networks:
+  #     - backend_nest
+
+  # dev-db:
+  #   image: postgres:latest
+  #   ports:
+  #     - '5432:5432'
+  #   environment:
+  #     POSTGRES_USER: umer
+  #     POSTGRES_PASSWORD: 123
+  #     POSTGRES_DB: safesafar
+  #   networks:
+  #     - backend_nest
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: safesafar
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - backend_nest
+
+volumes:
+  mongodb_data:
+
+    #dev-redis:
+    #  image: redis:latest
+    #  ports:
+    #    - "6379:6379"
+    #  networks:
+    #    - backend_nest
+
+networks:
+  backend_nest:
