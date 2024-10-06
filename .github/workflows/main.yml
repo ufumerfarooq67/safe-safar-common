@@ -30,7 +30,7 @@ jobs:
         run: git config --global core.longpaths true
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Run linter
         run: pnpm run lint
