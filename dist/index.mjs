@@ -1,9 +1,6 @@
-"use strict";
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
@@ -21,19 +18,6 @@ var __spreadValues = (a, b) => {
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 var __async = (__this, __arguments, generator) => {
   return new Promise((resolve, reject) => {
@@ -56,57 +40,29 @@ var __async = (__this, __arguments, generator) => {
   });
 };
 
-// index.ts
-var libs_exports = {};
-__export(libs_exports, {
-  AUTH_SERVICE: () => AUTH_SERVICE,
-  AbstractRepository: () => AbstractRepository,
-  AbstractSchema: () => AbstractSchema,
-  BILLING_SERVICE: () => BILLING_SERVICE,
-  CardDto: () => CardDto,
-  CreateChargeDto: () => CreateChargeDto,
-  CreatePaymentChargeDto: () => CreatePaymentChargeDto,
-  CreateUserDto: () => CreateUserDto,
-  CreateUsersManagementDto: () => CreateUsersManagementDto,
-  CurrentUser: () => CurrentUser,
-  DatabaseModule: () => DatabaseModule,
-  GetUserDto: () => GetUserDto,
-  JwtAuthGuard: () => JwtAuthGuard,
-  LoggerModule: () => LoggerModule,
-  NOTIFICATIONS_SERVICE: () => NOTIFICATIONS_SERVICE,
-  SendEmailNotificationDto: () => SendEmailNotificationDto,
-  UpdateUsersManagementDto: () => UpdateUsersManagementDto,
-  UserDocument: () => UserDocument,
-  UserManagementDocument: () => UserManagementDocument,
-  UserManagementSchema: () => UserManagementSchema,
-  UserSchema: () => UserSchema,
-  createLogger: () => createLogger
-});
-module.exports = __toCommonJS(libs_exports);
-
 // constants/services.ts
 var AUTH_SERVICE = "auth";
 var BILLING_SERVICE = "billing";
 var NOTIFICATIONS_SERVICE = "notifications";
 
 // decorators/current-user.decorator.ts
-var import_common = require("@nestjs/common");
+import { createParamDecorator } from "@nestjs/common";
 var getCurrentUserByContext = /* @__PURE__ */ __name((ctx) => {
   return ctx.switchToHttp().getRequest().user;
 }, "getCurrentUserByContext");
-var CurrentUser = (0, import_common.createParamDecorator)((data, ctx) => getCurrentUserByContext(ctx));
+var CurrentUser = createParamDecorator((data, ctx) => getCurrentUserByContext(ctx));
 
 // dto/users/create-users-management.dto.ts
-var import_class_transformer2 = require("class-transformer");
-var import_class_validator4 = require("class-validator");
+import { Type as Type2 } from "class-transformer";
+import { IsDate, IsNotEmptyObject as IsNotEmptyObject2, IsObject as IsObject2, ValidateNested as ValidateNested2 } from "class-validator";
 
 // dto/billing/charge.ts
-var import_class_validator2 = require("class-validator");
-var import_class_transformer = require("class-transformer");
+import { IsNotEmpty as IsNotEmpty2, IsNumber as IsNumber2, IsObject, IsNotEmptyObject, ValidateNested } from "class-validator";
+import { Type } from "class-transformer";
 
 // dto/billing/card.ts
-var import_class_validator = require("class-validator");
-var import_graphql = require("@nestjs/graphql");
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { InputType, Field } from "@nestjs/graphql";
 function _ts_decorate(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -129,35 +85,35 @@ var _CardDto = class _CardDto {
 __name(_CardDto, "CardDto");
 var CardDto = _CardDto;
 _ts_decorate([
-  (0, import_class_validator.IsString)(),
-  (0, import_class_validator.IsNotEmpty)(),
-  (0, import_graphql.Field)(),
+  IsString(),
+  IsNotEmpty(),
+  Field(),
   _ts_metadata("design:type", String)
 ], CardDto.prototype, "number", void 0);
 _ts_decorate([
-  (0, import_class_validator.IsNumber)(),
-  (0, import_class_validator.IsNotEmpty)(),
-  (0, import_graphql.Field)(),
+  IsNumber(),
+  IsNotEmpty(),
+  Field(),
   _ts_metadata("design:type", Number)
 ], CardDto.prototype, "exp_month", void 0);
 _ts_decorate([
-  (0, import_class_validator.IsNumber)(),
-  (0, import_class_validator.IsNotEmpty)(),
-  (0, import_graphql.Field)(),
+  IsNumber(),
+  IsNotEmpty(),
+  Field(),
   _ts_metadata("design:type", Number)
 ], CardDto.prototype, "exp_year", void 0);
 _ts_decorate([
-  (0, import_class_validator.IsString)(),
-  (0, import_class_validator.IsNotEmpty)(),
-  (0, import_graphql.Field)(),
+  IsString(),
+  IsNotEmpty(),
+  Field(),
   _ts_metadata("design:type", String)
 ], CardDto.prototype, "cvc", void 0);
 CardDto = _ts_decorate([
-  (0, import_graphql.InputType)()
+  InputType()
 ], CardDto);
 
 // dto/billing/charge.ts
-var import_graphql2 = require("@nestjs/graphql");
+import { InputType as InputType2, Field as Field2 } from "@nestjs/graphql";
 function _ts_decorate2(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -178,25 +134,25 @@ var _CreateChargeDto = class _CreateChargeDto {
 __name(_CreateChargeDto, "CreateChargeDto");
 var CreateChargeDto = _CreateChargeDto;
 _ts_decorate2([
-  (0, import_class_validator2.IsObject)(),
-  (0, import_class_validator2.IsNotEmptyObject)(),
-  (0, import_class_validator2.ValidateNested)(),
-  (0, import_class_transformer.Type)(() => CardDto),
-  (0, import_graphql2.Field)(() => CardDto),
+  IsObject(),
+  IsNotEmptyObject(),
+  ValidateNested(),
+  Type(() => CardDto),
+  Field2(() => CardDto),
   _ts_metadata2("design:type", typeof CardDto === "undefined" ? Object : CardDto)
 ], CreateChargeDto.prototype, "card", void 0);
 _ts_decorate2([
-  (0, import_class_validator2.IsNumber)(),
-  (0, import_class_validator2.IsNotEmpty)(),
-  (0, import_graphql2.Field)(),
+  IsNumber2(),
+  IsNotEmpty2(),
+  Field2(),
   _ts_metadata2("design:type", Number)
 ], CreateChargeDto.prototype, "amount", void 0);
 CreateChargeDto = _ts_decorate2([
-  (0, import_graphql2.InputType)()
+  InputType2()
 ], CreateChargeDto);
 
 // dto/billing/payment.ts
-var import_class_validator3 = require("class-validator");
+import { IsString as IsString2, IsNotEmpty as IsNotEmpty3 } from "class-validator";
 function _ts_decorate3(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -217,13 +173,13 @@ var _CreatePaymentChargeDto = class _CreatePaymentChargeDto extends CreateCharge
 __name(_CreatePaymentChargeDto, "CreatePaymentChargeDto");
 var CreatePaymentChargeDto = _CreatePaymentChargeDto;
 _ts_decorate3([
-  (0, import_class_validator3.IsString)(),
-  (0, import_class_validator3.IsNotEmpty)(),
+  IsString2(),
+  IsNotEmpty3(),
   _ts_metadata3("design:type", String)
 ], CreatePaymentChargeDto.prototype, "email", void 0);
 
 // dto/users/create-users-management.dto.ts
-var import_graphql3 = require("@nestjs/graphql");
+import { InputType as InputType3, Field as Field3 } from "@nestjs/graphql";
 function _ts_decorate4(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -245,32 +201,32 @@ var _CreateUsersManagementDto = class _CreateUsersManagementDto {
 __name(_CreateUsersManagementDto, "CreateUsersManagementDto");
 var CreateUsersManagementDto = _CreateUsersManagementDto;
 _ts_decorate4([
-  (0, import_class_validator4.IsDate)(),
-  (0, import_class_transformer2.Type)(() => Date),
-  (0, import_graphql3.Field)(),
+  IsDate(),
+  Type2(() => Date),
+  Field3(),
   _ts_metadata4("design:type", typeof Date === "undefined" ? Object : Date)
 ], CreateUsersManagementDto.prototype, "startDate", void 0);
 _ts_decorate4([
-  (0, import_class_validator4.IsDate)(),
-  (0, import_class_transformer2.Type)(() => Date),
-  (0, import_graphql3.Field)(),
+  IsDate(),
+  Type2(() => Date),
+  Field3(),
   _ts_metadata4("design:type", typeof Date === "undefined" ? Object : Date)
 ], CreateUsersManagementDto.prototype, "endDate", void 0);
 _ts_decorate4([
-  (0, import_class_validator4.IsObject)(),
-  (0, import_class_validator4.IsNotEmptyObject)(),
-  (0, import_class_validator4.ValidateNested)(),
-  (0, import_class_transformer2.Type)(() => CreateChargeDto),
-  (0, import_graphql3.Field)(() => CreateChargeDto),
+  IsObject2(),
+  IsNotEmptyObject2(),
+  ValidateNested2(),
+  Type2(() => CreateChargeDto),
+  Field3(() => CreateChargeDto),
   _ts_metadata4("design:type", typeof CreateChargeDto === "undefined" ? Object : CreateChargeDto)
 ], CreateUsersManagementDto.prototype, "charge", void 0);
 CreateUsersManagementDto = _ts_decorate4([
-  (0, import_graphql3.InputType)()
+  InputType3()
 ], CreateUsersManagementDto);
 
 // dto/users/update-users-management.dto.ts
-var import_mapped_types = require("@nestjs/mapped-types");
-var import_graphql4 = require("@nestjs/graphql");
+import { PartialType } from "@nestjs/mapped-types";
+import { InputType as InputType4 } from "@nestjs/graphql";
 function _ts_decorate5(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -278,16 +234,16 @@ function _ts_decorate5(decorators, target, key, desc) {
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 }
 __name(_ts_decorate5, "_ts_decorate");
-var _UpdateUsersManagementDto = class _UpdateUsersManagementDto extends (0, import_mapped_types.PartialType)(CreateUsersManagementDto) {
+var _UpdateUsersManagementDto = class _UpdateUsersManagementDto extends PartialType(CreateUsersManagementDto) {
 };
 __name(_UpdateUsersManagementDto, "UpdateUsersManagementDto");
 var UpdateUsersManagementDto = _UpdateUsersManagementDto;
 UpdateUsersManagementDto = _ts_decorate5([
-  (0, import_graphql4.InputType)()
+  InputType4()
 ], UpdateUsersManagementDto);
 
 // dto/users/create-user.dto.ts
-var import_class_validator5 = require("class-validator");
+import { IsEmail, IsNotEmpty as IsNotEmpty4, IsString as IsString3, IsStrongPassword } from "class-validator";
 function _ts_decorate6(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -308,20 +264,20 @@ var _CreateUserDto = class _CreateUserDto {
 __name(_CreateUserDto, "CreateUserDto");
 var CreateUserDto = _CreateUserDto;
 _ts_decorate6([
-  (0, import_class_validator5.IsString)(),
-  (0, import_class_validator5.IsNotEmpty)(),
-  (0, import_class_validator5.IsEmail)(),
+  IsString3(),
+  IsNotEmpty4(),
+  IsEmail(),
   _ts_metadata5("design:type", String)
 ], CreateUserDto.prototype, "email", void 0);
 _ts_decorate6([
-  (0, import_class_validator5.IsString)(),
-  (0, import_class_validator5.IsNotEmpty)(),
-  (0, import_class_validator5.IsStrongPassword)(),
+  IsString3(),
+  IsNotEmpty4(),
+  IsStrongPassword(),
   _ts_metadata5("design:type", String)
 ], CreateUserDto.prototype, "password", void 0);
 
 // dto/users/get-user.dto.ts
-var import_class_validator6 = require("class-validator");
+import { IsString as IsString4, IsNotEmpty as IsNotEmpty5 } from "class-validator";
 function _ts_decorate7(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -341,13 +297,13 @@ var _GetUserDto = class _GetUserDto {
 __name(_GetUserDto, "GetUserDto");
 var GetUserDto = _GetUserDto;
 _ts_decorate7([
-  (0, import_class_validator6.IsString)(),
-  (0, import_class_validator6.IsNotEmpty)(),
+  IsString4(),
+  IsNotEmpty5(),
   _ts_metadata6("design:type", String)
 ], GetUserDto.prototype, "_id", void 0);
 
 // dto/notifications/email/index.ts
-var import_class_validator7 = require("class-validator");
+import { IsEmail as IsEmail2, IsNotEmpty as IsNotEmpty6, IsString as IsString5 } from "class-validator";
 function _ts_decorate8(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -371,20 +327,20 @@ var _SendEmailNotificationDto = class _SendEmailNotificationDto {
 __name(_SendEmailNotificationDto, "SendEmailNotificationDto");
 var SendEmailNotificationDto = _SendEmailNotificationDto;
 _ts_decorate8([
-  (0, import_class_validator7.IsEmail)(),
-  (0, import_class_validator7.IsNotEmpty)(),
+  IsEmail2(),
+  IsNotEmpty6(),
   _ts_metadata7("design:type", String)
 ], SendEmailNotificationDto.prototype, "email", void 0);
 _ts_decorate8([
-  (0, import_class_validator7.IsString)(),
-  (0, import_class_validator7.IsNotEmpty)(),
+  IsString5(),
+  IsNotEmpty6(),
   _ts_metadata7("design:type", String)
 ], SendEmailNotificationDto.prototype, "text", void 0);
 
 // guards/jwt-auth.guard.ts
-var import_common2 = require("@nestjs/common");
-var import_microservices = require("@nestjs/microservices");
-var import_rxjs = require("rxjs");
+import { Inject, Injectable } from "@nestjs/common";
+import { ClientProxy } from "@nestjs/microservices";
+import { catchError, map, of, tap } from "rxjs";
 function _ts_decorate9(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -416,26 +372,26 @@ var _JwtAuthGuard = class _JwtAuthGuard {
     }
     return this.authClient.send("authenticate", {
       Authentication: token
-    }).pipe((0, import_rxjs.tap)((res) => {
+    }).pipe(tap((res) => {
       context.switchToHttp().getRequest().user = res;
-    }), (0, import_rxjs.map)(() => true), (0, import_rxjs.catchError)(() => (0, import_rxjs.of)(false)));
+    }), map(() => true), catchError(() => of(false)));
   }
 };
 __name(_JwtAuthGuard, "JwtAuthGuard");
 var JwtAuthGuard = _JwtAuthGuard;
 JwtAuthGuard = _ts_decorate9([
-  (0, import_common2.Injectable)(),
-  _ts_param(0, (0, import_common2.Inject)("NATS_SERVICE")),
+  Injectable(),
+  _ts_param(0, Inject("NATS_SERVICE")),
   _ts_metadata8("design:type", Function),
   _ts_metadata8("design:paramtypes", [
-    typeof import_microservices.ClientProxy === "undefined" ? Object : import_microservices.ClientProxy
+    typeof ClientProxy === "undefined" ? Object : ClientProxy
   ])
 ], JwtAuthGuard);
 
 // services/database/database.module.ts
-var import_common3 = require("@nestjs/common");
-var import_config = require("@nestjs/config");
-var import_mongoose = require("@nestjs/mongoose");
+import { Module } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { MongooseModule } from "@nestjs/mongoose";
 function _ts_decorate10(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -445,21 +401,21 @@ function _ts_decorate10(decorators, target, key, desc) {
 __name(_ts_decorate10, "_ts_decorate");
 var _DatabaseModule = class _DatabaseModule {
   static forFeature(models) {
-    return import_mongoose.MongooseModule.forFeature(models);
+    return MongooseModule.forFeature(models);
   }
 };
 __name(_DatabaseModule, "DatabaseModule");
 var DatabaseModule = _DatabaseModule;
 DatabaseModule = _ts_decorate10([
-  (0, import_common3.Module)({
+  Module({
     imports: [
-      import_mongoose.MongooseModule.forRootAsync({
+      MongooseModule.forRootAsync({
         useFactory: /* @__PURE__ */ __name((configService) => ({
           uri: configService.get("DATABASE_URL"),
           authSource: "admin"
         }), "useFactory"),
         inject: [
-          import_config.ConfigService
+          ConfigService
         ]
       })
     ]
@@ -467,8 +423,8 @@ DatabaseModule = _ts_decorate10([
 ], DatabaseModule);
 
 // services/database/abstract.repository.ts
-var import_mongoose2 = require("mongoose");
-var import_common4 = require("@nestjs/common");
+import { Types } from "mongoose";
+import { NotFoundException } from "@nestjs/common";
 var _AbstractRepository = class _AbstractRepository {
   constructor(model) {
     __publicField(this, "model");
@@ -477,7 +433,7 @@ var _AbstractRepository = class _AbstractRepository {
   create(createEntityDto) {
     return __async(this, null, function* () {
       const createdEntity = new this.model(__spreadProps(__spreadValues({}, createEntityDto), {
-        _id: new import_mongoose2.Types.ObjectId()
+        _id: new Types.ObjectId()
       }));
       return (yield createdEntity.save()).toJSON();
     });
@@ -489,7 +445,7 @@ var _AbstractRepository = class _AbstractRepository {
         this.logger.warn("Entity not found", {
           filter
         });
-        throw new import_common4.NotFoundException("Entity not found");
+        throw new NotFoundException("Entity not found");
       }
       return entity;
     });
@@ -503,7 +459,7 @@ var _AbstractRepository = class _AbstractRepository {
         this.logger.warn("Entity not found", {
           filter
         });
-        throw new import_common4.NotFoundException("Entity not found");
+        throw new NotFoundException("Entity not found");
       }
       return entity;
     });
@@ -520,7 +476,7 @@ var _AbstractRepository = class _AbstractRepository {
         this.logger.warn("Entity not found", {
           filter
         });
-        throw new import_common4.NotFoundException("Entity not found");
+        throw new NotFoundException("Entity not found");
       }
       return entity;
     });
@@ -530,9 +486,9 @@ __name(_AbstractRepository, "AbstractRepository");
 var AbstractRepository = _AbstractRepository;
 
 // services/database/abstract.schema.ts
-var import_mongoose3 = require("@nestjs/mongoose");
-var import_mongoose4 = require("mongoose");
-var import_graphql5 = require("@nestjs/graphql");
+import { Prop, Schema } from "@nestjs/mongoose";
+import { SchemaTypes, Types as Types2 } from "mongoose";
+import { Field as Field4, ObjectType } from "@nestjs/graphql";
 function _ts_decorate11(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -552,22 +508,22 @@ var _AbstractSchema = class _AbstractSchema {
 __name(_AbstractSchema, "AbstractSchema");
 var AbstractSchema = _AbstractSchema;
 _ts_decorate11([
-  (0, import_mongoose3.Prop)({
-    type: import_mongoose4.SchemaTypes.ObjectId
+  Prop({
+    type: SchemaTypes.ObjectId
   }),
-  (0, import_graphql5.Field)(() => String),
-  _ts_metadata9("design:type", typeof import_mongoose4.Types === "undefined" || typeof import_mongoose4.Types.ObjectId === "undefined" ? Object : import_mongoose4.Types.ObjectId)
+  Field4(() => String),
+  _ts_metadata9("design:type", typeof Types2 === "undefined" || typeof Types2.ObjectId === "undefined" ? Object : Types2.ObjectId)
 ], AbstractSchema.prototype, "_id", void 0);
 AbstractSchema = _ts_decorate11([
-  (0, import_mongoose3.Schema)(),
-  (0, import_graphql5.ObjectType)({
+  Schema(),
+  ObjectType({
     isAbstract: true
   })
 ], AbstractSchema);
 
 // models/users/user.schema.ts
-var import_mongoose5 = require("@nestjs/mongoose");
-var import_mongoose6 = require("@nestjs/mongoose");
+import { Prop as Prop2, SchemaFactory } from "@nestjs/mongoose";
+import { Schema as Schema2 } from "@nestjs/mongoose";
 function _ts_decorate12(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -589,28 +545,28 @@ var _UserDocument = class _UserDocument extends AbstractSchema {
 __name(_UserDocument, "UserDocument");
 var UserDocument = _UserDocument;
 _ts_decorate12([
-  (0, import_mongoose5.Prop)({
+  Prop2({
     required: true
   }),
   _ts_metadata10("design:type", String)
 ], UserDocument.prototype, "email", void 0);
 _ts_decorate12([
-  (0, import_mongoose5.Prop)({
+  Prop2({
     required: true
   }),
   _ts_metadata10("design:type", String)
 ], UserDocument.prototype, "password", void 0);
 UserDocument = _ts_decorate12([
-  (0, import_mongoose6.Schema)({
+  Schema2({
     versionKey: false
   })
 ], UserDocument);
-var UserSchema = import_mongoose5.SchemaFactory.createForClass(UserDocument);
+var UserSchema = SchemaFactory.createForClass(UserDocument);
 
 // models/users/users-management.schema.ts
-var import_mongoose7 = require("@nestjs/mongoose");
-var import_mongoose8 = require("@nestjs/mongoose");
-var import_graphql6 = require("@nestjs/graphql");
+import { Prop as Prop3, SchemaFactory as SchemaFactory2 } from "@nestjs/mongoose";
+import { Schema as Schema3 } from "@nestjs/mongoose";
+import { Field as Field5, ObjectType as ObjectType2 } from "@nestjs/graphql";
 function _ts_decorate13(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -635,51 +591,51 @@ var _UserManagementDocument = class _UserManagementDocument extends AbstractSche
 __name(_UserManagementDocument, "UserManagementDocument");
 var UserManagementDocument = _UserManagementDocument;
 _ts_decorate13([
-  (0, import_mongoose7.Prop)({
+  Prop3({
     required: true
   }),
-  (0, import_graphql6.Field)(),
+  Field5(),
   _ts_metadata11("design:type", typeof Date === "undefined" ? Object : Date)
 ], UserManagementDocument.prototype, "timestamp", void 0);
 _ts_decorate13([
-  (0, import_mongoose7.Prop)({
+  Prop3({
     required: true
   }),
-  (0, import_graphql6.Field)(),
+  Field5(),
   _ts_metadata11("design:type", typeof Date === "undefined" ? Object : Date)
 ], UserManagementDocument.prototype, "startDate", void 0);
 _ts_decorate13([
-  (0, import_mongoose7.Prop)({
+  Prop3({
     required: true
   }),
-  (0, import_graphql6.Field)(),
+  Field5(),
   _ts_metadata11("design:type", typeof Date === "undefined" ? Object : Date)
 ], UserManagementDocument.prototype, "endDate", void 0);
 _ts_decorate13([
-  (0, import_mongoose7.Prop)({
+  Prop3({
     required: true
   }),
-  (0, import_graphql6.Field)(),
+  Field5(),
   _ts_metadata11("design:type", String)
 ], UserManagementDocument.prototype, "userId", void 0);
 _ts_decorate13([
-  (0, import_mongoose7.Prop)({
+  Prop3({
     required: true
   }),
-  (0, import_graphql6.Field)(),
+  Field5(),
   _ts_metadata11("design:type", String)
 ], UserManagementDocument.prototype, "invoiceId", void 0);
 UserManagementDocument = _ts_decorate13([
-  (0, import_mongoose8.Schema)({
+  Schema3({
     versionKey: false
   }),
-  (0, import_graphql6.ObjectType)()
+  ObjectType2()
 ], UserManagementDocument);
-var UserManagementSchema = import_mongoose7.SchemaFactory.createForClass(UserManagementDocument);
+var UserManagementSchema = SchemaFactory2.createForClass(UserManagementDocument);
 
 // services/logger/logger.module.ts
-var import_common5 = require("@nestjs/common");
-var import_nestjs_pino = require("nestjs-pino");
+import { Module as Module2 } from "@nestjs/common";
+import { LoggerModule as PinoLoggerModule } from "nestjs-pino";
 function _ts_decorate14(decorators, target, key, desc) {
   var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -692,9 +648,9 @@ var _LoggerModule = class _LoggerModule {
 __name(_LoggerModule, "LoggerModule");
 var LoggerModule = _LoggerModule;
 LoggerModule = _ts_decorate14([
-  (0, import_common5.Module)({
+  Module2({
     imports: [
-      import_nestjs_pino.LoggerModule.forRoot({
+      PinoLoggerModule.forRoot({
         pinoHttp: {
           transport: {
             target: "pino-pretty",
@@ -710,12 +666,11 @@ LoggerModule = _ts_decorate14([
 ], LoggerModule);
 
 // services/logger/common.logger.ts
-var import_common6 = require("@nestjs/common");
+import { Logger } from "@nestjs/common";
 var createLogger = /* @__PURE__ */ __name((name) => {
-  return new import_common6.Logger(name);
+  return new Logger(name);
 }, "createLogger");
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
+export {
   AUTH_SERVICE,
   AbstractRepository,
   AbstractSchema,
@@ -738,4 +693,4 @@ var createLogger = /* @__PURE__ */ __name((name) => {
   UserManagementSchema,
   UserSchema,
   createLogger
-});
+};
